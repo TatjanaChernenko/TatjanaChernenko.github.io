@@ -1,6 +1,6 @@
 # Tatjana Chernenko
 
-Principal-level Applied AI Scientist focused on speech AI, multilingual systems, evaluation architecture, and enterprise research-to-production.
+Applied AI Scientist focused on speech AI, multilingual systems, evaluation ecosystems, Agentic AI, RAG, Retrieval, Knowledge-Graphs, data architecture, LLM- and ML-based systems and enterprise research-to-production.
 
 ## Public Articles
 
