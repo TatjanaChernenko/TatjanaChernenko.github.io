@@ -1,6 +1,6 @@
 # Representativeness Before Metrics: Rethinking AI Evaluation for Deployment
 
-**Why better metrics are not enough when the benchmark itself is a weak proxy for real-world variability**
+**Why better metrics are not enough when the benchmark itself, what enterprise speech AI evaluation reveals about benchmark reliability - and why the lessons reach further than speech**
 
 ---
 
@@ -10,25 +10,27 @@
 
 The current weakness in AI evaluation is often described as a metric problem. Teams ask which metric to add, which judge to calibrate, or which scoring layer to improve. Sometimes that is the right question. Often it is not. A benchmark can be large, standardized, and widely used while still being a weak proxy for the conditions that matter. When that happens, evaluation fails before the metric does.
 
+Much of what follows draws on experience building evaluation frameworks for enterprise speech AI - a domain where representativeness problems are both concrete and expensive. Speech is a useful test case precisely because its failure modes are hard to hide: noise, speaker variation, language imbalance, and terminology gaps all break systems in ways that pooled scores consistently miss. The patterns generalize.
+
 This is the distinction many teams still miss: **benchmark confidence is not the same as deployment confidence.**
 
 A benchmark tells you how a system performed under benchmark conditions. Deployment requires a stronger claim: that those conditions were close enough to the operational variability that the result deserves trust. That second claim is where weak representativeness usually breaks first.
 
 ---
 
-## When benchmarks stop predicting what matters
+## When speech benchmarks stop predicting what matters
 
 Recent work in speech and audio evaluation makes this visible. An ACL 2025 study on large audio models found that current benchmarks have:
 
 > *"limited predictive power for user preferences"*
-> — Static and Interactive Evaluations of Large Audio Models (ACL 2025)
+> - Static and Interactive Evaluations of Large Audio Models (ACL 2025)
 
 ...and that even aggregated benchmarks explained only a minority of preference variance. That is not an argument against benchmarking. It is an argument against treating benchmark success as a stronger proxy for real user value than the evidence supports.
 
 The same problem appears from another angle when benchmark quality itself is uneven. A 2025 ACL audit of widely used multilingual speech datasets found:
 
 > *"significant quality issues"* in Common Voice, FLEURS, and VoxPopuli for at least some languages.
-> — Data Quality Issues in Multilingual Speech Datasets (ACL 2025)
+> - Data Quality Issues in Multilingual Speech Datasets (ACL 2025)
 
 This matters not only for training, but for evaluation. If benchmark quality varies meaningfully across languages, then pooled multilingual results do not necessarily demonstrate multilingual robustness. They may simply demonstrate multilingual averaging.
 
@@ -59,13 +61,13 @@ A benchmark can list many languages, many tasks, or many domains and still fail 
 OpenAI's realtime evaluation guidance expresses the same principle from a systems perspective. In voice systems, content quality and audio quality can fail independently:
 
 > *"A single score can hide real problems."*
-> — OpenAI, Realtime Eval Guide (2026)
+> - OpenAI, Realtime Eval Guide (2026)
 
 The larger lesson is broader than voice: once systems have multiple relatively independent failure axes, evaluation becomes less trustworthy when those axes are collapsed too early into scalar summaries.
 
 Representativeness is what keeps those axes visible.
 
-A benchmark is only as useful as the failures it is capable of revealing. If it cannot surface whether a system breaks under noisy audio, terminology stress, weak-language conditions, speaker variability, or interactional messiness, then its usefulness for deployment decisions is limited — no matter how polished the final score looks.
+A benchmark is only as useful as the failures it is capable of revealing. If it cannot surface whether a system breaks under noisy audio, terminology stress, weak-language conditions, speaker variability, or interactional messiness, then its usefulness for deployment decisions is limited - no matter how polished the final score looks.
 
 ---
 
@@ -73,7 +75,7 @@ A benchmark is only as useful as the failures it is capable of revealing. If it 
 
 **First, explicit slice logic.** Not broad categories for presentation value, but slices tied to real decision risk: language, speaking style, noise condition, terminology density, speaker variation, and downstream task context.
 
-In enterprise speech AI, this kind of slice logic quickly becomes a system of its own. Building evaluation coverage for a production-grade enterprise system can mean spanning 100 or more evaluation dimensions — languages, noise profiles, speaking styles, domain registers, transcription accuracy under terminology stress, and downstream workflow impact. No single public benchmark comes close to that surface. Representative evaluation at enterprise scale is constructed, not downloaded.
+In enterprise speech AI, this kind of slice logic quickly becomes a system of its own. Building evaluation coverage for a production-grade enterprise system can mean spanning 100 or more evaluation dimensions - languages, noise profiles, speaking styles, domain registers, transcription accuracy under terminology stress, and downstream workflow impact. No single public benchmark comes close to that surface. Representative evaluation at enterprise scale is constructed, not downloaded.
 
 One illustration of what a single missing slice looks like in practice: customer-specific terminology is a well-known and costly failure mode in enterprise ASR, but standard public benchmarks do not cover it. This gap motivated our accepted LREC 2026 paper, A Dataset for Evaluating ASR on Specialized Vocabulary (Klering, Cortes, Chernenko et al.).
 
@@ -91,7 +93,7 @@ This is also why "better metrics" is often an incomplete answer to weak evaluati
 
 That is the real bottleneck.
 
-The field does need stronger metrics and more reliable evaluators. But just as often, it needs less confidence in large, clean, weakly representative benchmarks — and more attention to slice quality, uneven conditions, and the difference between broad coverage and useful resemblance.
+The field does need stronger metrics and more reliable evaluators. But just as often, it needs less confidence in large, clean, weakly representative benchmarks - and more attention to slice quality, uneven conditions, and the difference between broad coverage and useful resemblance.
 
 The purpose of evaluation is not only to summarize system quality. It is to support decisions. And once evaluation is understood that way, representativeness stops being a methodological detail and becomes part of the credibility layer itself.
 
